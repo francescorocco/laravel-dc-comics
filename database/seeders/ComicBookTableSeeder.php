@@ -26,7 +26,7 @@ class ComicBookTableSeeder extends Seeder
             $newComic->tiseriestle = $comic_book['series'];
             $newComic->sale_date = $comic_book['sale_date'];
             $newComic->type = $comic_book['type'];
-
+ 
         }
     }
 }
