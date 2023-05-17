@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('page-title', 'Laravel DC-Comics')
 
 

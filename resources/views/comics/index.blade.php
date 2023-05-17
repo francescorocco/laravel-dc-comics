@@ -1,8 +1,10 @@
-@extends('layaout.app')
+@extends('layouts.app')
 
 @section('page-title', 'Comics List')
 
 @section('content')
+
+<a href="{{route('comics.create')}}" class="btn btn-primary">Crea nuovo Fumetto</a>
 
 <table class="table table-striped table-success">
     <thead>
@@ -21,7 +23,7 @@
             <td>{{$comic->title}}</td>
             <td>{{$comic->series}}</td>
             <td>{{$comic->price}}</td>
-            <td></td>
+            <td> <a class="btn btn-secondary" href="{{route('comics.show',  ['comic'=>$comic->id])}}">Dettagli</a></td>
         </tr>
         @endforeach
     </tbody>
