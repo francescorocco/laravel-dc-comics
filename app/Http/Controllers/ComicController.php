@@ -36,22 +36,31 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        $form_data = $request->all();
-
-
-
         
+        $request->validate([
+            'title'=>'required|max:50',
+            'description'=>'nullable|max:60000',
+            'thumb'=>'required|url|max:255',
+            'price'=>'required|max:6',
+            'series'=>'required|max:40',
+            'sale_date'=>'required|max:10',
+            'type'=>'required|max:30',
+        ]);
+        
+        
+        $form_data = $request->all();
         $newComic = new Comic();
-        $newComic->title = $form_data['title'];
-        $newComic->description = $form_data['description'];
-        $newComic->thumb = $form_data['thumb'];
-        $newComic->price = $form_data['price'];
-        $newComic->series = $form_data['series'];
-        $newComic->sale_date = $form_data['sale_date'];
-        $newComic->type = $form_data['type'];
+        $newComic->fill($form_data);
+        // $newComic->title = $form_data['title'];
+        // $newComic->description = $form_data['description'];
+        // $newComic->thumb = $form_data['thumb'];
+        // $newComic->price = $form_data['price'];
+        // $newComic->series = $form_data['series'];
+        // $newComic->sale_date = $form_data['sale_date'];
+        // $newComic->type = $form_data['type'];
         $newComic->save();
         
-        return redirect()->route('comics.index');
+        return redirect()->route('comics.show', ['comic'=>$newComic->id]);
     }
 
     /**
@@ -86,12 +95,22 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comic $comic)
     {
-        $comic = Comic::findOrFail($id);
+
+        $request->validate([
+            'title'=>'required|max:50',
+            'description'=>'nullable|max:60000',
+            'thumb'=>'required|url|max:255',
+            'price'=>'required|max:6',
+            'series'=>'required|max:40',
+            'sale_date'=>'required|max:10',
+            'type'=>'required|max:30',
+        ]);
+        
         $form_data = $request->all();
         $comic->update($form_data);
-        return redirect()->route('comics.show', ['comic' => $comic->id]);
+        return to_route('comics.show', ['comic' => $comic->id])->with('status', 'Comic aggiornato!');
     }
 
     /**
