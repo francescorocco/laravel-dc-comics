@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateComicRequest;
+use App\Http\Requests\StoreComicRequest;
 use App\Models\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ComicController extends Controller
 {
@@ -34,30 +37,25 @@ class ComicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreComicRequest $request)
     {
         
-        $request->validate([
-            'title'=>'required|max:50',
-            'description'=>'nullable|max:60000',
-            'thumb'=>'required|url|max:255',
-            'price'=>'required|max:6',
-            'series'=>'required|max:40',
-            'sale_date'=>'required|max:10',
-            'type'=>'required|max:30',
-        ]);
+        // $request->validate([
+        //     'title'=>'required|max:50',
+        //     'description'=>'nullable|max:60000',
+        //     'thumb'=>'required|url|max:255',
+        //     'price'=>'required|max:6',
+        //     'series'=>'required|max:40',
+        //     'sale_date'=>'required|max:10',
+        //     'type'=>'required|max:30',
+        // ]);
         
-        
-        $form_data = $request->all();
+        //$form_data = $this->validation($request->all());
+        $form_data = $request->validate();
+
         $newComic = new Comic();
         $newComic->fill($form_data);
-        // $newComic->title = $form_data['title'];
-        // $newComic->description = $form_data['description'];
-        // $newComic->thumb = $form_data['thumb'];
-        // $newComic->price = $form_data['price'];
-        // $newComic->series = $form_data['series'];
-        // $newComic->sale_date = $form_data['sale_date'];
-        // $newComic->type = $form_data['type'];
+
         $newComic->save();
         
         return redirect()->route('comics.show', ['comic'=>$newComic->id]);
@@ -95,20 +93,22 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comic $comic)
+    public function update(UpdateComicRequest $request, Comic $comic)
     {
 
-        $request->validate([
-            'title'=>'required|max:50',
-            'description'=>'nullable|max:60000',
-            'thumb'=>'required|url|max:255',
-            'price'=>'required|max:6',
-            'series'=>'required|max:40',
-            'sale_date'=>'required|max:10',
-            'type'=>'required|max:30',
-        ]);
+        // $request->validate([
+        //     'title'=>'required|max:50',
+        //     'description'=>'nullable|max:60000',
+        //     'thumb'=>'required|url|max:255',
+        //     'price'=>'required|max:6',
+        //     'series'=>'required|max:40',
+        //     'sale_date'=>'required|max:10',
+        //     'type'=>'required|max:30',
+        // ]);
         
-        $form_data = $request->all();
+        // $form_data = $this->validation($request->all());
+        $form_data = $request->validate();
+
         $comic->update($form_data);
         return to_route('comics.show', ['comic' => $comic->id])->with('status', 'Comic aggiornato!');
     }
