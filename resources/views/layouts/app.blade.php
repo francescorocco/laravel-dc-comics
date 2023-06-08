@@ -18,6 +18,7 @@
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
+                {{-- qui reindirizziamo i messaggi di errori "standard" con dei messaggi di errori personalizzati che troviamo  nello StoreComicRequests--}}
                 @foreach ($errors->all() as $error)
                     <li>{{$error}}</li>                    
                 @endforeach

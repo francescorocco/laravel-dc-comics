@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateComicRequest;
 use App\Http\Requests\StoreComicRequest;
 use App\Models\Comic;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+
 
 class ComicController extends Controller
 {

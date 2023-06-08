@@ -24,9 +24,9 @@
             <td>{{$comic->series}}</td>
             <td>{{$comic->price}}</td>
             <td class="d-flex"> 
-              <a class="btn btn-secondary" href="{{route('comics.show',  ['comic'=>$comic->id])}}">Dettagli</a>
+              <a class="btn btn-primary" href="{{route('comics.show',  ['comic'=>$comic->id])}}">Dettagli</a>
               <a class="btn btn-secondary" href="{{route('comics.edit',  ['comic'=>$comic->id])}}">Modifica</a>
-              <form action="{{route('comics.destroy', ['comic' => $comic->id])}}" class="btn btn-secondary" method="POST">
+              <form action="{{route('comics.destroy', ['comic' => $comic->id])}}" class="btn" method="POST">
 
                 @csrf
                 @method('DELETE')
