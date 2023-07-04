@@ -23,6 +23,7 @@ class UpdateComicRequest extends FormRequest
      */
     public function rules()
     {
+        // regole valiudazione per il comic
         return [
             'title'=>'required|max:50',
             'description'=>'nullable|max:60000',
@@ -33,6 +34,7 @@ class UpdateComicRequest extends FormRequest
             'type'=>'required|max:30',
         ];
     }
+    // messaggi personalizzati in caso di validazione negativa 
         public function messages(){
             return[
                 'title.required'=>'Il titolo è obbligatorio',

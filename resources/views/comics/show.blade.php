@@ -5,7 +5,11 @@
 @section('content')
 
 <div class="card">
-    <img src="{{$comic->thumb}}" class="card-img-top" alt="{{$comic->title}}">
+  
+    <div class="w-75">
+      <img src="{{$comic->thumb}}" class="card-img-top w-25" alt="{{$comic->title}}">
+    </div>
+    
     <div class="card-body">
       <h5 class="card-title">{{$comic->title}}</h5>
       <p class="card-text">{{$comic->title}}</p>

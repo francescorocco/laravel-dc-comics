@@ -38,27 +38,15 @@ class ComicController extends Controller
      */
     public function store(StoreComicRequest $request)
     {
-        
-        // $request->validate([
-        //     'title'=>'required|max:50',
-        //     'description'=>'nullable|max:60000',
-        //     'thumb'=>'required|url|max:255',
-        //     'price'=>'required|max:6',
-        //     'series'=>'required|max:40',
-        //     'sale_date'=>'required|max:10',
-        //     'type'=>'required|max:30',
-        // ]);
-        
-        //$form_data = $this->validation($request->all());
-        $form_data = $request->validate();
+        $form_data = $request->validated();
 
         $newComic = new Comic();
         $newComic->fill($form_data);
-
         $newComic->save();
-        
-        return redirect()->route('comics.show', ['comic'=>$newComic->id]);
+
+        return redirect()->route('comics.show', ['comic' => $newComic->id]);
     }
+
 
     /**
      * Display the specified resource.
@@ -94,22 +82,11 @@ class ComicController extends Controller
      */
     public function update(UpdateComicRequest $request, Comic $comic)
     {
-
-        // $request->validate([
-        //     'title'=>'required|max:50',
-        //     'description'=>'nullable|max:60000',
-        //     'thumb'=>'required|url|max:255',
-        //     'price'=>'required|max:6',
-        //     'series'=>'required|max:40',
-        //     'sale_date'=>'required|max:10',
-        //     'type'=>'required|max:30',
-        // ]);
-        
-        // $form_data = $this->validation($request->all());
-        $form_data = $request->validate();
+        // nel seguente modo prendiamo la request e la faccima validare dalla UpdateComicRequest
+        $form_data = $request->validated();
 
         $comic->update($form_data);
-        return to_route('comics.show', ['comic' => $comic->id])->with('status', 'Comic aggiornato!');
+        return to_route('comics.show', ['comic' => $comic->id])->with('status', 'Comic aggiornato!'); 
     }
 
     /**
